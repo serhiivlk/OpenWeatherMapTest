@@ -1,0 +1,35 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+apply from: moduleConfigs.androidCommon
+
+android {
+    defaultConfig {
+        applicationId "com.serhiiv.openweather.test"
+    }
+}
+
+dependencies {
+    implementation project(appModules.coreAndroid)
+
+    implementation project(featureModules.weather)
+
+    implementation libs.kotlinStdLib
+    implementation libs.appcompat
+    implementation libs.coreKtx
+    implementation libs.constraintLayout
+
+    implementation libs.navigationFragment
+    implementation libs.navigationUi
+
+    implementation libs.dagger
+    implementation libs.daggerAndroidSupport
+    kapt libs.daggerCompiler
+    kapt libs.daggerAndroidCompiler
+
+    testImplementation libs.junit4
+    androidTestImplementation libs.testExtJunit
+    androidTestImplementation libs.espressoCore
+}

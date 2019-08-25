@@ -1,0 +1,24 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+apply from: moduleConfigs.androidCommon
+
+dependencies {
+    implementation project(appModules.coreAndroid)
+
+    implementation libs.kotlinStdLib
+    implementation libs.appcompat
+    implementation libs.fragment
+    implementation libs.coreKtx
+    implementation libs.constraintLayout
+
+    implementation libs.javaxInject
+    implementation libs.daggerAndroidSupport
+
+    implementation libs.lifecycleViewModel
+
+    testImplementation libs.junit4
+    androidTestImplementation libs.testExtJunit
+    androidTestImplementation libs.espressoCore
+}

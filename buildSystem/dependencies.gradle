@@ -1,0 +1,222 @@
+ext {
+    projectConfig = [
+            appId         : 'com.serhii.openweather.test',
+            minSdk        : 15,
+            targetSdk     : 28,
+            compileSdk    : 28,
+
+            appVersionCode: 1,
+            appVersionName: '0.0.1'
+    ]
+
+    appModules = [
+            app        : ':app',
+            core       : ':base:core',
+            coreAndroid: ':base:core-android',
+            coreDi     : ':base:core-di',
+            domain     : ':base:domain',
+            data       : ':base:data',
+            dataLocal  : ':base:data-local',
+            dataRemote : ':base:data-remote'
+    ]
+
+    featureModules = [
+            chooseCity: ":features:choose-city",
+            weather   : ":features:weather"
+    ]
+
+    libModules = [
+    ]
+
+    versions = [
+            androidGradlePlugin  : '3.6.0-alpha07',
+            androidJunit5Plugin  : '1.4.0.0',
+            kotlin               : '1.3.50',
+            coroutines           : '1.3.0-RC2',
+            coreKtx              : '1.2.0-alpha03',
+            appcompat            : '1.1.0-rc01',
+            fragment             : '1.2.0-alpha02',
+            archCore             : '2.1.0-alpha01',
+            annotation           : '1.1.0-beta01',
+            material             : '1.1.0-alpha09',
+            constraintLayout     : '1.1.3',
+            recyclerView         : '1.1.0-beta03',
+            recyclerViewSelection: '1.1.0-alpha01',
+            gridLayout           : '1.0.0',
+            cardView             : '1.0.0',
+            legacySupportV4      : '1.0.0',
+            vectorDrawable       : '1.1.0-rc01',
+            navigation           : '2.2.0-alpha01',
+            lifecycle            : '2.2.0-alpha03',
+            room                 : '2.2.0-beta01',
+            work                 : '1.0.1',
+            javaxInject          : '1',
+            dagger               : '2.24',
+            assistedInject       : '0.4.0',
+            moshi                : '1.8.0',
+            retrofit             : '2.6.1',
+            retrofitRxJavaAdapter: '1.0.0',
+            okhttp               : '3.14.1',
+            rxJava               : '2.2.8',
+            rxAndroid            : '2.1.1',
+            rxKotlin             : '2.3.0',
+            rxBinding            : '3.0.0-alpha2',
+            glide                : '4.9.0',
+            coil                 : '0.6.1',
+            glideTransformations : '3.3.0',
+            threeTenABP          : '1.2.0',
+            threeTenBP           : '1.3.8',
+
+            mpChart              : '3.1.0-alpha',
+            countryCodePicker    : '2.2.6',
+            codeScanner          : '2.1.0',
+            pdfViewer            : '3.1.0-beta.1',
+            circleImageView      : '2.2.0',
+            rxImagePicker        : '2.2.1',
+
+            timber               : '4.7.1',
+
+            leakCanary           : '1.6.3',
+
+            jsoup                : '1.12.1',
+
+            json                 : '20180813',
+
+            junit4               : '4.13-beta-3',
+            junit                : '5.5.0-M1',
+            testRunner           : '1.2.0-alpha03',
+            testRules            : '1.2.0-alpha03',
+            testExt              : '1.1.2-alpha02',
+            hamcrest             : '2.1',
+            assertJ              : '3.12.2',
+            espresso             : '3.3.0-alpha02',
+            uiAutomator          : '2.2.0',
+            mockito              : '2.27.0',
+            mockitoKotlin        : '2.1.0',
+            mockK                : '1.9.3',
+            robolectric          : '4.3-alpha-2'
+    ]
+
+    moduleConfigs = [
+            androidCommon: "$rootDir/buildSystem/config_android_common.gradle"
+    ]
+
+    buildPlugins = [
+            androidGradle     : "com.android.tools.build:gradle:${versions.androidGradlePlugin}",
+            kotlin            : "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}",
+            androidJunit5     : "de.mannodermaus.gradle.plugins:android-junit5:${versions.androidJunit5Plugin}",
+            navigationSafeArgs: "androidx.navigation:navigation-safe-args-gradle-plugin:${versions.navigation}"
+    ]
+
+    libs = [
+            kotlinStdLib             : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}",
+            coroutines               : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutines}",
+            coroutinesAndroid        : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}",
+            coreKtx                  : "androidx.core:core-ktx:${versions.coreKtx}",
+            appcompat                : "androidx.appcompat:appcompat:${versions.appcompat}",
+            fragment                 : "androidx.fragment:fragment-ktx:${versions.fragment}",
+            annotation               : "androidx.annotation:annotation:${versions.annotation}",
+            constraintLayout         : "androidx.constraintlayout:constraintlayout:${versions.constraintLayout}",
+            recyclerView             : "androidx.recyclerview:recyclerview:${versions.recyclerView}",
+            recyclerViewSelection    : "androidx.recyclerview:recyclerview-selection:${versions.recyclerViewSelection}",
+            gridLayout               : "androidx.gridlayout:gridlayout:${versions.gridLayout}",
+            cardView                 : "androidx.cardview:cardview:${versions.cardView}",
+            material                 : "com.google.android.material:material:${versions.material}",
+            legacySupportV4          : "androidx.legacy:legacy-support-v4:${versions.legacySupportV4}",
+            vectorDrawable           : "androidx.vectordrawable:vectordrawable:${versions.vectorDrawable}",
+
+            navigationFragment       : "androidx.navigation:navigation-fragment-ktx:${versions.navigation}",
+            navigationUi             : "androidx.navigation:navigation-ui-ktx:${versions.navigation}",
+
+            lifecycleExtensions      : "androidx.lifecycle:lifecycle-extensions:${versions.lifecycle}",
+            lifecycleViewModel       : "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}",
+            lifecycleLiveData        : "androidx.lifecycle:lifecycle-livedata-ktx:${versions.lifecycle}",
+            lifecycleRuntime         : "androidx.lifecycle:lifecycle-runtime:${versions.lifecycle}",
+            lifecycleCompiler        : "androidx.lifecycle:lifecycle-compiler:${versions.lifecycle}",
+            lifecycleSavedState      : "androidx.lifecycle:lifecycle-viewmodel-savedstate:1.0.0-alpha01",
+
+            roomRuntime              : "androidx.room:room-runtime:${versions.room}",
+            roomCompiler             : "androidx.room:room-compiler:${versions.room}",
+            roomKtx                  : "androidx.room:room-ktx:${versions.room}",
+            roomTesting              : "androidx.room:room-testing:${versions.room}",
+
+            archCoreCommon           : "androidx.arch.core:core-common:${versions.archCore}",
+            archCore                 : "androidx.arch.core:core:${versions.archCore}",
+            archCoreTesting          : "androidx.arch.core:core-testing:${versions.archCore}",
+            archCoreRuntime          : "androidx.arch.core:core-runtime:${versions.archCore}",
+
+            workRuntime              : "android.arch.work:work-runtime-ktx:${versions.work}",
+            workRxJava2              : "android.arch.work:work-rxjava2:${versions.work}",
+            workTesting              : "android.arch.work:work-testing:${versions.work}",
+
+            rxJava                   : "io.reactivex.rxjava2:rxjava:${versions.rxJava}",
+            rxAndroid                : "io.reactivex.rxjava2:rxandroid:${versions.rxAndroid}",
+            rxKotlin                 : "io.reactivex.rxjava2:rxkotlin:${versions.rxKotlin}",
+            rxBinding                : "com.jakewharton.rxbinding3:rxbinding:${versions.rxBinding}",
+
+            javaxInject              : "javax.inject:javax.inject:${versions.javaxInject}",
+
+            dagger                   : "com.google.dagger:dagger:${versions.dagger}",
+            daggerAndroidSupport     : "com.google.dagger:dagger-android-support:${versions.dagger}",
+            daggerCompiler           : "com.google.dagger:dagger-compiler:${versions.dagger}",
+            daggerAndroidCompiler    : "com.google.dagger:dagger-android-processor:${versions.dagger}",
+
+            assistedInjectAnnotations: "com.squareup.inject:assisted-inject-annotations-dagger2:${versions.assistedInject}",
+            assistedInjectProcessor  : "com.squareup.inject:assisted-inject-processor-dagger2:${versions.assistedInject}",
+
+            moshi                    : "com.squareup.moshi:moshi:${versions.moshi}",
+            moshiAdapters            : "com.squareup.moshi:moshi-adapters:${versions.moshi}",
+            moshiKotlinCodegen       : "com.squareup.moshi:moshi-kotlin-codegen:${versions.moshi}",
+
+            retrofit                 : "com.squareup.retrofit2:retrofit:${versions.retrofit}",
+            retrofitConverterGson    : "com.squareup.retrofit2:converter-gson:${versions.retrofit}",
+            retrofitConverterMoshi   : "com.squareup.retrofit2:converter-moshi:${versions.retrofit}",
+            retrofitRxJavaAdapter    : "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}",
+            okhttpLoginInterceptor   : "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}",
+            okhttpMockWebServer      : "com.squareup.okhttp3:mockwebserver:${versions.okhttp}",
+
+            glide                    : "com.github.bumptech.glide:glide:${versions.glide}",
+            glideCompiler            : "com.github.bumptech.glide:compiler:${versions.glide}",
+            glideOkHttpIntegration   : "com.github.bumptech.glide:okhttp3-integration:${versions.glide}",
+            glideTransformations     : "jp.wasabeef:glide-transformations:${versions.glideTransformations}",
+
+            coil                     : "io.coil-kt:coil:${versions.coil}",
+
+            threeTenABP              : "com.jakewharton.threetenabp:threetenabp:${versions.threeTenABP}",
+            threeTenBP               : "org.threeten:threetenbp:${versions.threeTenBP}",
+
+            mpChart                  : "com.github.PhilJay:MPAndroidChart:${versions.mpChart}",
+            countryCodePicker        : "com.hbb20:ccp:${versions.countryCodePicker}",
+            codeScanner              : "com.budiyev.android:code-scanner:${versions.codeScanner}",
+            pdfViewer                : "com.github.barteksc:android-pdf-viewer:${versions.pdfViewer}",
+            circleImageView          : "de.hdodenhof:circleimageview:${versions.circleImageView}",
+            rxImagePicker            : "com.mlsdev.rximagepicker:library:${versions.rxImagePicker}",
+
+            timber                   : "com.jakewharton.timber:timber:${versions.timber}",
+
+            leakCanary               : "com.squareup.leakcanary:leakcanary-android:${versions.leakCanary}",
+            leakCanaryNoOp           : "com.squareup.leakcanary:leakcanary-android-no-op:${versions.leakCanary}",
+            leakCanarySupport        : "com.squareup.leakcanary:leakcanary-support-fragment:${versions.leakCanary}",
+
+            jsoup                    : "org.jsoup:jsoup:${versions.jsoup}",
+
+            json                     : "org.json:json:${versions.json}",
+
+            junit4                   : "junit:junit:${versions.junit4}",
+            junitApi                 : "org.junit.jupiter:junit-jupiter-api:${versions.junit}",
+            junitEngine              : "org.junit.jupiter:junit-jupiter-engine:${versions.junit}",
+            junitParams              : "org.junit.jupiter:junit-jupiter-params:${versions.junit}",
+            junitVintage             : "org.junit.vintage:junit-vintage-engine:${versions.junit}",
+            testRunner               : "androidx.test:runner:${versions.testRunner}",
+            testRules                : "androidx.test:rules:${versions.testRules}",
+            testExtJunit             : "androidx.test.ext:junit:${versions.testExt}",
+            hamcrest                 : "org.hamcrest:hamcrest-library:${versions.hamcrest}",
+            assertJ                  : "org.assertj:assertj-core:${versions.assertJ}",
+            espressoCore             : "androidx.test.espresso:espresso-core:${versions.espresso}",
+            uiAutomator              : "androidx.test.uiautomator:uiautomator:${versions.uiAutomator}",
+            mockitoCore              : "org.mockito:mockito-core:${versions.mockito}",
+            mockitoKotlin            : "com.nhaarman.mockitokotlin2:mockito-kotlin:${versions.mockitoKotlin}",
+            mockK                    : "io.mockk:mockk:${versions.mockK}",
+            robolectric              : "org.robolectric:robolectric:${versions.robolectric}"
+    ]
+}
