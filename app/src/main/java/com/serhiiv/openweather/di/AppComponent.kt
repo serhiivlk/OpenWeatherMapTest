@@ -1,7 +1,9 @@
 package com.serhiiv.openweather.di
 
 import com.serhiiv.openweather.BaseApplication
+import com.serhiiv.openweather.core.android.di.App
 import com.serhiiv.openweather.di.feature.FeatureMainModule
+import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
@@ -11,6 +13,7 @@ import dagger.android.support.AndroidSupportInjectionModule
         AndroidSupportInjectionModule::class,
         MainToolsModule::class,
         DataModule::class,
+        DomainModule::class,
         FeatureMainModule::class
     ]
 )
@@ -19,12 +22,12 @@ interface AppComponent : AndroidInjector<BaseApplication> {
 
     @Component.Factory
     interface Factory {
-        fun create(): AppComponent
+        fun create(@BindsInstance app: App): AppComponent
     }
 
     object Initializer {
-        fun init(): AppComponent {
-            return DaggerAppComponent.factory().create()
+        fun init(app: App): AppComponent {
+            return DaggerAppComponent.factory().create(app)
         }
     }
 }

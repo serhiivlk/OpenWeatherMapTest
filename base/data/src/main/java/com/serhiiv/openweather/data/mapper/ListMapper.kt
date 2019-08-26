@@ -11,6 +11,7 @@ class ListMapper @Inject constructor(
     override fun map(from: ListEntity): ForecastItem = with(from) {
         ForecastItem(
             date = dt,
+            dateText = dtTxt,
             main = main?.let(mainMapper::invoke),
             weather = weather?.let(weatherMapper::invoke)
         )

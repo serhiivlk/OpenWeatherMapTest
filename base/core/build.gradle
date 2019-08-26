@@ -2,6 +2,7 @@ apply plugin: 'kotlin'
 
 dependencies {
     implementation libs.kotlinStdLib
+    implementation libs.coroutines
 
     implementation libs.javaxInject
 }

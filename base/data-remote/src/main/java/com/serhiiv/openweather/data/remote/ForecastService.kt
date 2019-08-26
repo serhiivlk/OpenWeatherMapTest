@@ -10,6 +10,7 @@ interface ForecastService {
     @GET("forecast/")
     suspend fun getForecastByCityName(
         @Query("q") cityName: String,
+        @Query("units") units: String,
         @Query("appid") appId: String
     ): ForecastResponse
 }

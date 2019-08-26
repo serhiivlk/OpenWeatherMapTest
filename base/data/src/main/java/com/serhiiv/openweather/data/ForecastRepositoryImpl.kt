@@ -10,8 +10,8 @@ class ForecastRepositoryImpl @Inject constructor(
     private val remoteDataSource: ForecastRemoteDataSource,
     private val forecastMapper: ForecastMapper
 ) : ForecastRepository {
-    override suspend fun getForecastByCityName(cityName: String): Forecast {
-        return remoteDataSource.getForecastByCityName(cityName)
+    override suspend fun getForecastByCityName(cityName: String, units: String): Forecast {
+        return remoteDataSource.getForecastByCityName(cityName, units)
             .let(forecastMapper::invoke)
     }
 }

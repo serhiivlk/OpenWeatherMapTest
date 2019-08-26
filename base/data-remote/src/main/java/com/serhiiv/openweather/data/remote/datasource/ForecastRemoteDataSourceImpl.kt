@@ -11,9 +11,9 @@ class ForecastRemoteDataSourceImpl @Inject constructor(
     private val service: ForecastService,
     private val forecastEntityMapper: ForecastEntityMapper
 ) : ForecastRemoteDataSource {
-    override suspend fun getForecastByCityName(cityName: String): ForecastEntity {
+    override suspend fun getForecastByCityName(cityName: String, units: String): ForecastEntity {
         val apiKey = ApiConstants.API_KEY
-        return service.getForecastByCityName(cityName, apiKey)
+        return service.getForecastByCityName(cityName, units, apiKey)
             .let(forecastEntityMapper::invoke)
     }
 }

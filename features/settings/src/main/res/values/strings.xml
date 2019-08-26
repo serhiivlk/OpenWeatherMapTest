@@ -1,0 +1,7 @@
+<resources>
+    <!-- Preference Titles -->
+    <string name="weather_header">Weather</string>
+
+    <!-- Weather Preferences -->
+    <string name="units_title">Units</string>
+</resources>

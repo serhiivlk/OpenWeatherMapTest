@@ -1,3 +1,15 @@
 <resources>
-    <string name="app_name">Weather</string>
+    <string name="weather_temp_formatted"
+        formatted="true"
+        translatable="false">%.0f° %s</string>
+    <string name="weather_temp_min_max_formatted"
+        formatted="true"
+        translatable="false">%.0f°/%.0f° %s</string>
+    <string name="weather_pressure_formatted"
+        formatted="true">Pressure: %.2f hPa</string>
+    <string name="weather_humidity_formatted"
+        formatted="true">Humidity: %d%%</string>
+    <string name="weather_icon_url_formatted"
+        formatted="true"
+        translatable="false">https://openweathermap.org/img/wn/%s@2x.png</string>
 </resources>

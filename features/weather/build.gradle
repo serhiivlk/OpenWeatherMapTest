@@ -14,11 +14,14 @@ dependencies {
     implementation libs.fragment
     implementation libs.coreKtx
     implementation libs.constraintLayout
+    implementation libs.recyclerView
 
     implementation libs.javaxInject
     implementation libs.daggerAndroidSupport
 
     implementation libs.lifecycleViewModel
+
+    implementation libs.coil
 
     testImplementation libs.junit4
     androidTestImplementation libs.testExtJunit

@@ -1,6 +1,7 @@
 apply plugin: 'kotlin'
 
 dependencies {
+    implementation project(appModules.core)
     implementation project(appModules.domain)
 
     implementation libs.kotlinStdLib

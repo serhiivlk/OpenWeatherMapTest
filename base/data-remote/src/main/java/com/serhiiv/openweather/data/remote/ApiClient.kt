@@ -6,7 +6,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-object ApiServiceFactory {
+object ApiClient {
 
     fun <T : Any> create(service: Class<T>, configBlock: Config.() -> Unit = {}): T {
         val config = Config().apply(configBlock)

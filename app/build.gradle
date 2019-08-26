@@ -16,12 +16,15 @@ dependencies {
     implementation project(appModules.coreAndroid)
     implementation project(appModules.data)
     implementation project(appModules.dataRemote)
+    implementation project(appModules.dataLocal)
     implementation project(appModules.domain)
 
     implementation project(featureModules.weather)
+    implementation project(featureModules.settings)
 
     implementation libs.kotlinStdLib
     implementation libs.appcompat
+    implementation libs.preference
     implementation libs.coreKtx
     implementation libs.constraintLayout
 

@@ -15,9 +15,11 @@
             <option value="$PROJECT_DIR$/base/core" />
             <option value="$PROJECT_DIR$/base/core-android" />
             <option value="$PROJECT_DIR$/base/data" />
+            <option value="$PROJECT_DIR$/base/data-local" />
             <option value="$PROJECT_DIR$/base/data-remote" />
             <option value="$PROJECT_DIR$/base/domain" />
             <option value="$PROJECT_DIR$/features" />
+            <option value="$PROJECT_DIR$/features/settings" />
             <option value="$PROJECT_DIR$/features/weather" />
           </set>
         </option>

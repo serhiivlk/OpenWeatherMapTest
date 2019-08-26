@@ -11,14 +11,14 @@ class GetForecastByCityName @Inject constructor(
 ) : UseCase<Forecast, GetForecastByCityName.Params>() {
     override suspend fun execute(params: Params): Either<Failure, Forecast> {
         return try {
-            val forecast = forecastRepository.getForecastByCityName(params.cityName)
+            val forecast = forecastRepository.getForecastByCityName(params.cityName, params.units)
             Either.Right(forecast)
         } catch (e: Exception) {
             Either.Left(GetForecastByCityNameFailure(e))
         }
     }
 
-    data class Params(val cityName: String)
+    data class Params(internal val cityName: String, internal val units: String)
 
     data class GetForecastByCityNameFailure(val error: Exception) : Failure.FeatureFailure()
 }

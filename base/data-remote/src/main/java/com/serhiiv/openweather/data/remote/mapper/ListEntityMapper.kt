@@ -11,6 +11,7 @@ class ListEntityMapper @Inject constructor(
     override fun map(from: ForecastListItemResponse): ListEntity = with(from) {
         ListEntity(
             dt = dt,
+            dtTxt = dtTxt,
             main = main?.let(mainEntityMapper::invoke),
             weather = weather?.firstOrNull()?.let(weatherEntityMapper::invoke)
         )

@@ -8,7 +8,8 @@ dependencies {
     implementation libs.kotlinStdLib
     implementation libs.appcompat
     implementation libs.coreKtx
-    implementation libs.constraintLayout
+
+    implementation libs.navigationFragment
 
     implementation libs.daggerAndroidSupport
 

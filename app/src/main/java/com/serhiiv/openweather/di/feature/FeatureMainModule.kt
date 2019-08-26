@@ -10,7 +10,8 @@ interface FeatureMainModule {
     @PerActivity
     @ContributesAndroidInjector(
         modules = [
-            FeatureWeatherModule::class
+            FeatureWeatherModule::class,
+            FeatureSettingsModule::class
         ]
     )
     fun contributeMainActivity(): MainActivity
