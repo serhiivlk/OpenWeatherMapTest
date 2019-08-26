@@ -1,0 +1,19 @@
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-kapt'
+
+dependencies {
+    implementation project(appModules.data)
+
+    implementation libs.kotlinStdLib
+
+    implementation libs.javaxInject
+
+    implementation libs.retrofit
+    implementation libs.retrofitConverterMoshi
+    implementation libs.okhttpLogginInterceptor
+    implementation libs.moshi
+    kapt libs.moshiKotlinCodegen
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8

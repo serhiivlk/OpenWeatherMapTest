@@ -1,7 +1,8 @@
-package com.serhiiv.openweather.test
+package com.serhiiv.openweather
 
 import android.os.Bundle
 import com.serhiiv.openweather.core.android.base.BaseActivity
+import com.serhiiv.openweather.test.R
 
 class MainActivity : BaseActivity() {
 

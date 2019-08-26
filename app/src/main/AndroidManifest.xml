@@ -5,6 +5,9 @@
     package="com.serhiiv.openweather.test"
     >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:name="com.serhiiv.openweather.BaseApplication"
         android:allowBackup="true"
@@ -15,7 +18,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         >
-        <activity android:name=".MainActivity">
+        <activity android:name="com.serhiiv.openweather.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

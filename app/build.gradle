@@ -12,7 +12,11 @@ android {
 }
 
 dependencies {
+    implementation project(appModules.core)
     implementation project(appModules.coreAndroid)
+    implementation project(appModules.data)
+    implementation project(appModules.dataRemote)
+    implementation project(appModules.domain)
 
     implementation project(featureModules.weather)
 
@@ -28,6 +32,8 @@ dependencies {
     implementation libs.daggerAndroidSupport
     kapt libs.daggerCompiler
     kapt libs.daggerAndroidCompiler
+
+    implementation libs.timber
 
     testImplementation libs.junit4
     androidTestImplementation libs.testExtJunit
