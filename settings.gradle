@@ -1,10 +1,14 @@
+apply from: "$rootDir/buildSystem/dependencies.gradle"
+
 include ':app'
-include ':features:weather'
-include ':base:core-android'
-include ':base:data'
-include ':base:domain'
-include ':base:data-remote'
-include ':base:core'
-include ':features:settings'
-include ':base:data-local'
-include ':features:choose-city'
+
+include appModules.core
+include appModules.coreAndroid
+include appModules.data
+include appModules.dataLocal
+include appModules.dataRemote
+include appModules.domain
+
+include featureModules.weather
+include featureModules.chooseCity
+include featureModules.settings
