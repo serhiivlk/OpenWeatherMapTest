@@ -1,4 +1,4 @@
-package com.serhiiv.openweather.domain.model
+package com.serhiiv.openweather.core.model
 
 data class Forecast(
     val city: City?,

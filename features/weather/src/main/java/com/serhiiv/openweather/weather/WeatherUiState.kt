@@ -1,6 +1,6 @@
 package com.serhiiv.openweather.weather
 
-import com.serhiiv.openweather.domain.model.Forecast
+import com.serhiiv.openweather.core.model.Forecast
 import javax.inject.Inject
 
 data class WeatherUiState(

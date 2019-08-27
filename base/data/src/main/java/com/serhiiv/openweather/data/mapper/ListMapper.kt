@@ -1,7 +1,7 @@
 package com.serhiiv.openweather.data.mapper
 
+import com.serhiiv.openweather.core.model.ForecastItem
 import com.serhiiv.openweather.data.model.ListEntity
-import com.serhiiv.openweather.domain.model.ForecastItem
 import javax.inject.Inject
 
 class ListMapper @Inject constructor(

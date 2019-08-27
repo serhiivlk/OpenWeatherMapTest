@@ -7,7 +7,6 @@ apply from: moduleConfigs.androidCommon
 dependencies {
     implementation project(appModules.core)
     implementation project(appModules.coreAndroid)
-    implementation project(appModules.domain)
 
     implementation libs.kotlinStdLib
     implementation libs.appcompat

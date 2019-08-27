@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.serhiiv.openweather.domain.functional
+package com.serhiiv.openweather.core.functional
 
 /**
  * Represents a value of one of two possible types (a disjoint union).

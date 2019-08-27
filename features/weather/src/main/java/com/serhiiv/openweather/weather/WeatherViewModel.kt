@@ -2,12 +2,12 @@ package com.serhiiv.openweather.weather
 
 import androidx.lifecycle.*
 import com.serhiiv.openweather.core.android.base.BaseViewModel
+import com.serhiiv.openweather.core.domain.interactor.GetForecastByCityName
 import com.serhiiv.openweather.core.domain.pipeline.ChangeUnitsEventPipeline
+import com.serhiiv.openweather.core.exception.Failure
+import com.serhiiv.openweather.core.model.Forecast
 import com.serhiiv.openweather.core.storage.PreferenceStore
 import com.serhiiv.openweather.core.tools.Logger
-import com.serhiiv.openweather.domain.exception.Failure
-import com.serhiiv.openweather.domain.interactor.GetForecastByCityName
-import com.serhiiv.openweather.domain.model.Forecast
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collect

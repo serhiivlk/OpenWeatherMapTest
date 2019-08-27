@@ -1,7 +1,7 @@
 package com.serhiiv.openweather.data.mapper
 
+import com.serhiiv.openweather.core.model.City
 import com.serhiiv.openweather.data.model.CityEntity
-import com.serhiiv.openweather.domain.model.City
 import javax.inject.Inject
 
 class CityMapper @Inject constructor() : DomainMapper<City, CityEntity> {
