@@ -16,5 +16,5 @@ interface BaseUseCase<out T, in P> where T : Any {
         scope.launch { onResult(execute(params)) }
     }
 
-    class None
+    class NoParams
 }

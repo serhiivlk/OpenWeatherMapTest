@@ -19,6 +19,7 @@
             <option value="$PROJECT_DIR$/base/data-remote" />
             <option value="$PROJECT_DIR$/base/domain" />
             <option value="$PROJECT_DIR$/features" />
+            <option value="$PROJECT_DIR$/features/choose-city" />
             <option value="$PROJECT_DIR$/features/settings" />
             <option value="$PROJECT_DIR$/features/weather" />
           </set>

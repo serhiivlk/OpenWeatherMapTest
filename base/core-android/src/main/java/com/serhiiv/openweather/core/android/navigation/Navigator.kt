@@ -7,4 +7,6 @@ interface Navigator {
     fun unbind()
 
     fun actionSettingsFromWeather()
+
+    fun actionChooseCityFromWeather()
 }

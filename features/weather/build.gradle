@@ -10,6 +10,7 @@ dependencies {
 
     implementation libs.kotlinStdLib
     implementation libs.appcompat
+    implementation libs.material
     implementation libs.fragment
     implementation libs.coreKtx
     implementation libs.constraintLayout

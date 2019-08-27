@@ -11,7 +11,8 @@ interface FeatureMainModule {
     @ContributesAndroidInjector(
         modules = [
             FeatureWeatherModule::class,
-            FeatureSettingsModule::class
+            FeatureSettingsModule::class,
+            FeatureChooseCityModule::class
         ]
     )
     fun contributeMainActivity(): MainActivity

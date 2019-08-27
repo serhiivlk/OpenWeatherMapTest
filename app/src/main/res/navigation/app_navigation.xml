@@ -15,10 +15,19 @@
             android:id="@+id/action_weatherFragment_to_settingsFragment"
             app:destination="@id/settingsFragment"
             />
+        <action
+            android:id="@+id/action_weatherFragment_to_chooseCityFragment"
+            app:destination="@id/chooseCityFragment"
+            />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.serhiiv.openweather.settings.SettingsFragment"
         android:label="SettingsFragment"
+        />
+    <fragment
+        android:id="@+id/chooseCityFragment"
+        android:name="com.serhiiv.openweather.choosecity.ChooseCityFragment"
+        android:label="ChooseCityFragment"
         />
 </navigation>

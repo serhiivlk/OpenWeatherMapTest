@@ -16,6 +16,12 @@ dependencies {
 
     implementation libs.javaxInject
 
+    implementation libs.roomRuntime
+    kapt libs.roomCompiler
+
+    implementation libs.moshi
+    kapt libs.moshiKotlinCodegen
+
     testImplementation libs.junit4
     androidTestImplementation libs.testExtJunit
     androidTestImplementation libs.espressoCore

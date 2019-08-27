@@ -21,6 +21,7 @@ dependencies {
 
     implementation project(featureModules.weather)
     implementation project(featureModules.settings)
+    implementation project(featureModules.chooseCity)
 
     implementation libs.kotlinStdLib
     implementation libs.appcompat

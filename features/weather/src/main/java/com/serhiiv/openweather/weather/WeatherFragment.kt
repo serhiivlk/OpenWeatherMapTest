@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import coil.api.load
 import com.serhiiv.openweather.core.android.base.BaseFragment
 import com.serhiiv.openweather.core.android.extention.isGone
+import com.serhiiv.openweather.core.android.navigation.Navigator
 import kotlinx.android.synthetic.main.fragment_weather.*
 import javax.inject.Inject
 
@@ -17,6 +18,8 @@ class WeatherFragment : BaseFragment() {
 
     @Inject
     lateinit var factory: WeatherViewModel.Factory
+    @Inject
+    lateinit var navigator: Navigator
 
     private val viewModel: WeatherViewModel by viewModels { factory }
 
@@ -30,6 +33,10 @@ class WeatherFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        city_name.setOnClickListener {
+            navigator.actionChooseCityFromWeather()
+        }
 
         viewModel.state.observe(viewLifecycleOwner, Observer {
             when (it) {
