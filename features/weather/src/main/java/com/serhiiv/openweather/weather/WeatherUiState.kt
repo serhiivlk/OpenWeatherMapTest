@@ -50,7 +50,7 @@ data class WeatherUiState(
                     humidity = _humidity?.let(res::getHumidity) ?: ""
                 }
                 it.weather?.also { weather ->
-                    description = weather.description ?: ""
+                    description = weather.main ?: ""
                     iconUrl = weather.icon?.let(res::getIconUrl) ?: ""
                 }
             }

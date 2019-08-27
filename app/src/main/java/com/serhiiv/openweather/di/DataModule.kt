@@ -1,11 +1,17 @@
 package com.serhiiv.openweather.di
 
+import androidx.room.Room
+import com.serhiiv.openweather.core.android.di.App
 import com.serhiiv.openweather.core.storage.PreferenceStore
 import com.serhiiv.openweather.data.ForecastRepositoryImpl
 import com.serhiiv.openweather.data.SelectableCityRepositoryImpl
+import com.serhiiv.openweather.data.datasource.ForecastLocalDataSource
 import com.serhiiv.openweather.data.datasource.ForecastRemoteDataSource
 import com.serhiiv.openweather.data.datasource.SelectableCityLocalDataSource
+import com.serhiiv.openweather.data.local.datasource.ForecastLocalDataSourceImpl
 import com.serhiiv.openweather.data.local.datasource.SelectableCityLocalDataSourceImpl
+import com.serhiiv.openweather.data.local.db.CacheDatabase
+import com.serhiiv.openweather.data.local.db.dao.*
 import com.serhiiv.openweather.data.local.storage.PreferenceStoreImpl
 import com.serhiiv.openweather.data.remote.ApiClient
 import com.serhiiv.openweather.data.remote.ForecastService
@@ -35,13 +41,50 @@ interface DataModule {
         fun bindSelectableCityRepository(impl: SelectableCityRepositoryImpl): SelectableCityRepository
     }
 
-    @Module
+    @Module(includes = [LocalModule.DatabaseModule::class])
     interface LocalModule {
         @Binds
         fun bindPreferenceStore(impl: PreferenceStoreImpl): PreferenceStore
 
         @Binds
         fun bindSelectableCityLocalDataSource(impl: SelectableCityLocalDataSourceImpl): SelectableCityLocalDataSource
+
+        @Binds
+        fun bindForecastLocalDataSource(impl: ForecastLocalDataSourceImpl): ForecastLocalDataSource
+
+        @Module
+        class DatabaseModule {
+            @Provides
+            fun provideOpenWeatherMapDatabase(app: App): CacheDatabase {
+                return Room.databaseBuilder(
+                    app.getApplicationContext(),
+                    CacheDatabase::class.java,
+                    "app.db"
+                )
+                    .fallbackToDestructiveMigration()
+                    .fallbackToDestructiveMigrationOnDowngrade()
+                    .build()
+            }
+
+            @Provides
+            fun provideForecastDao(database: CacheDatabase): ForecastDao = database.forecastDao()
+
+            @Provides
+            fun provideCityDao(database: CacheDatabase): CityDao = database.cityDao()
+
+            @Provides
+            fun provideListDou(database: CacheDatabase): ListDao = database.listDao()
+
+            @Provides
+            fun provideMainDao(database: CacheDatabase): MainDao = database.mainDao()
+
+            @Provides
+            fun provideWeatherDao(database: CacheDatabase): WeatherDao = database.weatherDao()
+
+//            @Provides
+//            fun provideListWeatherRelationDao(database: CacheDatabase): ListWeatherRelationDao =
+//                database.listWeatherRelationDao()
+        }
     }
 
     @Module

@@ -5,6 +5,15 @@ apply plugin: 'kotlin-kapt'
 
 apply from: moduleConfigs.androidCommon
 
+android {
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+}
+
 dependencies {
     implementation project(appModules.core)
     implementation project(appModules.coreAndroid)
@@ -17,12 +26,17 @@ dependencies {
     implementation libs.javaxInject
 
     implementation libs.roomRuntime
+    implementation libs.roomKtx
     kapt libs.roomCompiler
 
     implementation libs.moshi
     kapt libs.moshiKotlinCodegen
 
     testImplementation libs.junit4
+    testImplementation libs.testCore
+    testImplementation libs.assertJ
+    testImplementation libs.testExtJunit
+    testImplementation libs.robolectric
     androidTestImplementation libs.testExtJunit
     androidTestImplementation libs.espressoCore
 }

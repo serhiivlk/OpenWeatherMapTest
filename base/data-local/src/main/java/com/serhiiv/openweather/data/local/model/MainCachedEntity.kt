@@ -8,9 +8,6 @@ import com.serhiiv.openweather.data.local.db.constants.MainConstants
 import com.serhiiv.openweather.data.local.model.ListCachedEntity
 import com.serhiiv.openweather.data.local.model.base.CachedEntity
 
-/**
- * Model used solely for the caching of a [Main]
- */
 @Entity(
     tableName = MainConstants.TABLE_NAME,
     foreignKeys = [ForeignKey(
@@ -27,8 +24,5 @@ data class MainCachedEntity(
     var tempMin: Double? = null,
     var tempMax: Double? = null,
     var pressure: Double? = null,
-    var seaLevel: String? = null,
-    var grndLevel: String? = null,
-    var humidity: Int? = null,
-    var tempKf: String? = null
+    var humidity: Int? = null
 ) : CachedEntity

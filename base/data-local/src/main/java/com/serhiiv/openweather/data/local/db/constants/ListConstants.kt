@@ -6,6 +6,5 @@ object ListConstants {
 
     const val QUERY_LIST = "SELECT * FROM $TABLE_NAME"
 
-    const val DELETE_ALL_LISTS = "DELETE FROM $TABLE_NAME"
-
+    const val QUERY_DELETE_ALL = "DELETE FROM $TABLE_NAME"
 }

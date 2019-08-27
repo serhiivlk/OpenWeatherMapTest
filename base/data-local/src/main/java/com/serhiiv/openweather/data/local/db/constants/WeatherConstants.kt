@@ -6,6 +6,6 @@ object WeatherConstants {
 
     const val QUERY_WEATHER = "SELECT * FROM $TABLE_NAME"
 
-    const val DELETE_ALL_WEATHERS = "DELETE FROM $TABLE_NAME"
+    const val QUERY_DELETE_ALL = "DELETE FROM $TABLE_NAME"
 
 }

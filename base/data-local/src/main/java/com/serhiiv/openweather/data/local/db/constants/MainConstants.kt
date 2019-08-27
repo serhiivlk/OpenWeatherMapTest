@@ -6,6 +6,6 @@ object MainConstants {
 
     const val QUERY_MAIN = "SELECT * FROM $TABLE_NAME"
 
-    const val DELETE_ALL_MAINS = "DELETE FROM $TABLE_NAME"
+    const val QUERY_DELETE_ALL = "DELETE FROM $TABLE_NAME"
 
 }

@@ -13,7 +13,7 @@ data class ForecastResponse(
     @field:Json(name = "cnt")
     val cnt: Int? = null,
     @field:Json(name = "list")
-    val list: List<ForecastListItemResponse?>? = null,
+    val list: List<ForecastListItemResponse?> = emptyList(),
     @field:Json(name = "city")
     val city: CityResponse? = null
 )

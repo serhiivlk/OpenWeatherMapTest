@@ -37,6 +37,8 @@ dependencies {
     kapt libs.daggerCompiler
     kapt libs.daggerAndroidCompiler
 
+    implementation libs.roomRuntime
+
     implementation libs.timber
 
     testImplementation libs.junit4

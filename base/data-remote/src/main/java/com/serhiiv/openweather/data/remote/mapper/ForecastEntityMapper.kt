@@ -12,7 +12,7 @@ class ForecastEntityMapper @Inject constructor(
         ForecastEntity(
             city = city?.let(cityEntityMapper::invoke),
             cnt = cnt,
-            list = list?.filterNotNull()?.let(listEntityMapper::invoke)
+            list = list.filterNotNull().let(listEntityMapper::invoke)
         )
     }
 }

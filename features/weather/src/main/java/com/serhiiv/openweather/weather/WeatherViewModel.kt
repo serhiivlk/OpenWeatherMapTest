@@ -52,8 +52,9 @@ class WeatherViewModel @Inject constructor(
                 .collect { (cityName, units) ->
                     if (cityName.isEmpty()) {
                         navigator.actionChooseCityFromWeather()
+                    } else {
+                        loadData(cityName, units)
                     }
-                    loadData(cityName, units)
                 }
         }
     }

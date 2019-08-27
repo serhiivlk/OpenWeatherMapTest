@@ -5,10 +5,9 @@ import androidx.room.PrimaryKey
 import com.serhiiv.openweather.data.local.db.constants.ListConstants
 import com.serhiiv.openweather.data.local.model.base.CachedEntity
 
-/**
- * Model used solely for the caching of a [List]
- */
-@Entity(tableName = ListConstants.TABLE_NAME)
+@Entity(
+    tableName = ListConstants.TABLE_NAME
+)
 data class ListCachedEntity(
     @PrimaryKey
     var dt: Long? = null,
