@@ -31,8 +31,8 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:hint="@string/weather_hint_select_city"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/temp"
             app:layout_constraintTop_toTopOf="parent"
@@ -115,6 +115,16 @@
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
             app:constraint_referenced_ids="weather_description,humidity"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/daily_recycler"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/barrier"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

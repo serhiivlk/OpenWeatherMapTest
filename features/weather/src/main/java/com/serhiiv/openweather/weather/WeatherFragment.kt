@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import coil.api.load
 import com.serhiiv.openweather.core.android.base.BaseFragment
 import com.serhiiv.openweather.core.android.extention.isGone
 import com.serhiiv.openweather.core.android.navigation.Navigator
+import com.serhiiv.openweather.weather.recycler.WeatherDailyAdapter
 import kotlinx.android.synthetic.main.fragment_weather.*
 import javax.inject.Inject
 
@@ -22,6 +24,8 @@ class WeatherFragment : BaseFragment() {
     lateinit var navigator: Navigator
 
     private val viewModel: WeatherViewModel by viewModels { factory }
+
+    private val dailyAdapter = WeatherDailyAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,6 +40,12 @@ class WeatherFragment : BaseFragment() {
 
         city_name.setOnClickListener {
             navigator.actionChooseCityFromWeather()
+        }
+
+        daily_recycler.run {
+            layoutManager = LinearLayoutManager(this@WeatherFragment.context)
+            setHasFixedSize(true)
+            adapter = dailyAdapter
         }
 
         viewModel.state.observe(viewLifecycleOwner, Observer {
@@ -62,6 +72,8 @@ class WeatherFragment : BaseFragment() {
         this@WeatherFragment.pressure.text = pressure
         this@WeatherFragment.humidity.text = humidity
         weather_icon.load(iconUrl)
+
+        dailyAdapter.submitList(dayItems)
     }
 
     private fun showError(e: Exception) {

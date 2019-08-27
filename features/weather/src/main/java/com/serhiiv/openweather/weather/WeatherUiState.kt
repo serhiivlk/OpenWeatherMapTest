@@ -1,6 +1,9 @@
 package com.serhiiv.openweather.weather
 
 import com.serhiiv.openweather.core.model.Forecast
+import com.serhiiv.openweather.core.model.ForecastItem
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 data class WeatherUiState(
@@ -10,8 +13,16 @@ data class WeatherUiState(
     val pressure: String?,
     val humidity: String?,
     val description: String?,
-    val iconUrl: String?
+    val iconUrl: String?,
+    val dayItems: List<WeatherDailyUiState>
 ) {
+
+    data class WeatherDailyUiState(
+        val day: String?,
+        val temp: String?,
+        val iconUrl: String?
+    )
+
     class Mapper @Inject constructor(private val res: WeatherResources) {
         operator fun invoke(forecast: Forecast, units: String): WeatherUiState = with(forecast) {
             val cityName = city?.name ?: ""
@@ -43,6 +54,8 @@ data class WeatherUiState(
                     iconUrl = weather.icon?.let(res::getIconUrl) ?: ""
                 }
             }
+            val dayItems = items?.drop(1)?.map { mapDayItem(it, unitsSymbol) }.orEmpty()
+
             WeatherUiState(
                 cityName = cityName,
                 temp = temp,
@@ -50,14 +63,29 @@ data class WeatherUiState(
                 pressure = pressure,
                 humidity = humidity,
                 description = description,
-                iconUrl = iconUrl
+                iconUrl = iconUrl,
+                dayItems = dayItems
             )
         }
+
+        private fun mapDayItem(item: ForecastItem, units: String): WeatherDailyUiState =
+            with(item) {
+                WeatherDailyUiState(
+                    day = date?.let { dayFormat.format(Date(it * 1000)) },
+                    temp = main?.temp?.let { res.getTemp(it, units) },
+                    iconUrl = weather?.icon?.let(res::getIconUrl)
+                )
+            }
 
         private fun unitsSymbol(units: String) = when (units) {
             "metric" -> "C"
             "imperial" -> "F"
             else -> ""
+        }
+
+        companion object {
+            @JvmStatic
+            private val dayFormat = SimpleDateFormat("dd/MM hh:mm", Locale.getDefault())
         }
     }
 }
