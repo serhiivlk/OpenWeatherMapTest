@@ -3,8 +3,11 @@ package com.serhiiv.openweather.choosecity
 import androidx.lifecycle.*
 import com.serhiiv.openweather.choosecity.misc.CitySearchComparator
 import com.serhiiv.openweather.core.android.base.BaseViewModel
+import com.serhiiv.openweather.core.android.navigation.Navigator
 import com.serhiiv.openweather.core.domain.interactor.GetAllSelectableCities
+import com.serhiiv.openweather.core.domain.interactor.StoreSelectedCity
 import com.serhiiv.openweather.core.domain.interactor.base.BaseUseCase
+import com.serhiiv.openweather.core.domain.pipeline.ChangeSelectedCityEventPipeline
 import com.serhiiv.openweather.core.exception.Failure
 import com.serhiiv.openweather.core.model.SelectableCity
 import com.serhiiv.openweather.core.tools.Logger
@@ -18,7 +21,10 @@ import javax.inject.Inject
 
 @UseExperimental(ExperimentalCoroutinesApi::class, FlowPreview::class)
 class ChooseCityViewModel @Inject constructor(
-    private val getAllSelectableCities: GetAllSelectableCities
+    private val getAllSelectableCities: GetAllSelectableCities,
+    private val storeSelectedCity: StoreSelectedCity,
+    private val navigator: Navigator,
+    private val changeSelectedCityEventPipeline: ChangeSelectedCityEventPipeline
 ) : BaseViewModel() {
 
     private val searchQueryProducer: BroadcastChannel<String> = ConflatedBroadcastChannel("")
@@ -29,8 +35,23 @@ class ChooseCityViewModel @Inject constructor(
         get() = searchQueryProducer.asFlow()
             .debounce(300)
             .distinctUntilChanged()
-    private val citiesFlow
+    private val initCitiesFlow
         get() = citiesProducer.asFlow()
+    private val citiesFlow
+        get() = combine(
+            queryFlow,
+            initCitiesFlow
+        ) { query: String, cities: List<SelectableCity> ->
+            when {
+                query.isEmpty() -> cities
+                else -> cities.filter { it.name.contains(query, ignoreCase = true) }
+            }
+        }
+            .distinctUntilChanged()
+            .map { it.take(100) }
+            .combine(queryFlow) { cities, query ->
+                cities.sortedWith(CitySearchComparator(query))
+            }
 
     private val mutableState = MutableLiveData<ChooseCityState>()
 
@@ -38,36 +59,18 @@ class ChooseCityViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            combine(
-                queryFlow,
-                citiesFlow
-            ) { query: String, cities: List<SelectableCity> ->
-                when {
-                    query.isEmpty() -> cities
-                    else -> cities.filter { it.name.contains(query, ignoreCase = true) }
-                }
+            citiesFlow.collect {
+                mutableState.value = ChooseCityState.Success(it.take(100))
             }
-                .distinctUntilChanged()
-                .map { it.take(100) }
-                .combine(queryFlow) { cities, query ->
-                    cities.sortedWith(CitySearchComparator(query))
-                }
-                .collect {
-                    mutableState.value = ChooseCityState.Success(it.take(100))
-                }
         }
         loadData()
     }
 
     private fun loadData() {
         mutableState.value = ChooseCityState.Loading
-        getAllSelectableCities(viewModelScope, BaseUseCase.NoParams()) {
+        getAllSelectableCities(viewModelScope, BaseUseCase.None()) {
             it.either(this::handleFailure, this::handleSuccess)
         }
-    }
-
-    fun selectCity(city: SelectableCity) {
-
     }
 
     private fun handleSuccess(cities: List<SelectableCity>) {
@@ -92,6 +95,25 @@ class ChooseCityViewModel @Inject constructor(
     fun searchQuery(query: String?) {
         viewModelScope.launch {
             searchQueryProducer.send(query ?: "")
+        }
+    }
+
+    fun selectCity(city: SelectableCity) {
+        submitSearchQuery(city.name)
+    }
+
+    private fun submitSearchQuery(query: String?) {
+        query ?: return
+        val params = StoreSelectedCity.Params(query)
+        storeSelectedCity(viewModelScope, params) {
+            it.either({
+                Logger.e("store selected city error")
+            }) {
+                viewModelScope.launch {
+                    changeSelectedCityEventPipeline.send("", query)
+                }
+                navigator.actionWeatherFromChooseCity()
+            }
         }
     }
 

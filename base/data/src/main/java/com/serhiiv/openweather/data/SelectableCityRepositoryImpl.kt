@@ -14,4 +14,12 @@ class SelectableCityRepositoryImpl @Inject constructor(
         return localDataStore.getAll()
             .let(selectableCityMapper::invoke)
     }
+
+    override suspend fun getSelectedCityName(): String {
+        return localDataStore.getSelectedCityName()
+    }
+
+    override suspend fun storeCityName(cityName: String) {
+        localDataStore.storeCityName(cityName)
+    }
 }

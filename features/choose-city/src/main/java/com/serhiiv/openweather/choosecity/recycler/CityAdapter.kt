@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.serhiiv.openweather.choosecity.R
 import com.serhiiv.openweather.core.android.extention.inflate
 import com.serhiiv.openweather.core.model.SelectableCity
-import com.serhiiv.openweather.core.tools.Logger
 import kotlinx.android.synthetic.main.list_item_city.view.*
 
 class CityAdapter constructor(
@@ -32,11 +31,6 @@ class CityAdapter constructor(
         fun bind(item: SelectableCity) = with(itemView) {
             name.text = "%s, %s".format(item.name, item.country)
         }
-    }
-
-    override fun submitList(list: List<SelectableCity>?) {
-        Logger.d(list.toString())
-        super.submitList(list)
     }
 
     companion object {

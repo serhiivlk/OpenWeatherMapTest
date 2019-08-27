@@ -2,7 +2,9 @@ package com.serhiiv.openweather.weather
 
 import androidx.lifecycle.*
 import com.serhiiv.openweather.core.android.base.BaseViewModel
+import com.serhiiv.openweather.core.android.navigation.Navigator
 import com.serhiiv.openweather.core.domain.interactor.GetForecastByCityName
+import com.serhiiv.openweather.core.domain.pipeline.ChangeSelectedCityEventPipeline
 import com.serhiiv.openweather.core.domain.pipeline.ChangeUnitsEventPipeline
 import com.serhiiv.openweather.core.exception.Failure
 import com.serhiiv.openweather.core.model.Forecast
@@ -11,6 +13,7 @@ import com.serhiiv.openweather.core.tools.Logger
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
@@ -18,32 +21,46 @@ import javax.inject.Inject
 
 @UseExperimental(ExperimentalCoroutinesApi::class, FlowPreview::class)
 class WeatherViewModel @Inject constructor(
+    changeUnitsEventPipeline: ChangeUnitsEventPipeline,
+    changeSelectedCityEventPipeline: ChangeSelectedCityEventPipeline,
     private val getForecastByCityName: GetForecastByCityName,
-    private val changeUnitsEventPipeline: ChangeUnitsEventPipeline,
     private val preferenceStore: PreferenceStore,
-    private val uiStateMapper: WeatherUiState.Mapper
+    private val uiStateMapper: WeatherUiState.Mapper,
+    private val navigator: Navigator
 ) : BaseViewModel() {
 
     private val mutableState = MutableLiveData<WeatherState>()
 
     val state: LiveData<WeatherState> get() = mutableState
 
+    private val unitsFlow = changeUnitsEventPipeline.asFlow("").onStart {
+        val units = preferenceStore.getString("units", "metric")
+        emit(units)
+    }
+        .distinctUntilChanged()
+    private val cityNameFlow = changeSelectedCityEventPipeline.asFlow("").onStart {
+        val cityName = preferenceStore.getString("selected_city_name", "")
+        emit(cityName)
+    }
+
     init {
         viewModelScope.launch {
-            changeUnitsEventPipeline.asFlow("").onStart {
-                val units = preferenceStore.getString("units", "metric")
-                emit(units)
-            }
-                .distinctUntilChanged { old, new -> old == new }
-                .collect {
-                    loadData(it)
+            combine(
+                cityNameFlow,
+                unitsFlow
+            ) { cityName, units -> cityName to units }
+                .collect { (cityName, units) ->
+                    if (cityName.isEmpty()) {
+                        navigator.actionChooseCityFromWeather()
+                    }
+                    loadData(cityName, units)
                 }
         }
     }
 
-    private fun loadData(units: String) {
+    private fun loadData(cityName: String, units: String) {
         mutableState.value = WeatherState.Loading
-        val params = GetForecastByCityName.Params(cityName = "London", units = units)
+        val params = GetForecastByCityName.Params(cityName = cityName, units = units)
         getForecastByCityName(viewModelScope, params) {
             it.either(this::handleFailure) { forecast -> handleSuccess(forecast, units) }
         }

@@ -11,7 +11,7 @@ import javax.inject.Inject
 class GetAllSelectableCitiesUseCaseImpl @Inject constructor(
     private val selectableCityRepository: SelectableCityRepository
 ) : GetAllSelectableCities {
-    override suspend fun execute(params: BaseUseCase.NoParams): Either<Failure, List<SelectableCity>> {
+    override suspend fun execute(params: BaseUseCase.None): Either<Failure, List<SelectableCity>> {
         return try {
             val cities = selectableCityRepository.getAll()
             Either.Right(cities)

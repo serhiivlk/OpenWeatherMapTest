@@ -12,4 +12,5 @@
     <string name="weather_icon_url_formatted"
         formatted="true"
         translatable="false">https://openweathermap.org/img/wn/%s@2x.png</string>
+    <string name="weather_hint_select_city">Select City</string>
 </resources>

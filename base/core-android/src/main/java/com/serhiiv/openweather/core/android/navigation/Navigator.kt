@@ -9,4 +9,6 @@ interface Navigator {
     fun actionSettingsFromWeather()
 
     fun actionChooseCityFromWeather()
+
+    fun actionWeatherFromChooseCity()
 }

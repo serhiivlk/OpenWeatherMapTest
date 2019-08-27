@@ -18,7 +18,7 @@ open class BaseEventPipelineImpl<T> : BaseEventPipeline<T> {
         channel.send(EventPipeline(tag, entity))
     }
 
-    override suspend fun asFlow(tag: String): Flow<T> {
+    override fun asFlow(tag: String): Flow<T> {
         return channel.asFlow().filter { it.tag == tag }.map { it.data }
     }
 }

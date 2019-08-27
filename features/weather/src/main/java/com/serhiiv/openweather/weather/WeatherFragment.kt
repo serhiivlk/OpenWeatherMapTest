@@ -66,6 +66,7 @@ class WeatherFragment : BaseFragment() {
 
     private fun showError(e: Exception) {
         progress_bar.hide()
+        weather_content isGone false
         Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
     }
 }

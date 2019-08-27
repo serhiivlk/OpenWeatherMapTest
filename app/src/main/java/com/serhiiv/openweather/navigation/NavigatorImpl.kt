@@ -23,4 +23,10 @@ class NavigatorImpl @Inject constructor() : Navigator {
     override fun actionChooseCityFromWeather() {
         navController?.navigate(R.id.action_weatherFragment_to_chooseCityFragment)
     }
+
+    override fun actionWeatherFromChooseCity() {
+        navController?.run {
+            if (currentDestination?.id == R.id.chooseCityFragment) navigateUp()
+        }
+    }
 }
